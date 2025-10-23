@@ -1,55 +1,55 @@
+// ./src/components/login/index.tsx
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { styles } from "./styles";
- 
+
 export function Login() {
-  const router = useRouter();
- 
-  // 👇 Pré-preenchidos (mantidos do seu exemplo)
-  const [email, setEmail] = useState("aluno@teste.com");
-  const [password, setPassword] = useState("123@senac");
- 
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [loginError, setLoginError] = useState("");
- 
-  // Mesmo critério que você já usava
-  const canSubmit = email.trim() !== "" && password.trim() !== "" && !loading;
- 
-  const handleSignIn = async () => {
-    try {
-      setLoading(true);
-      setLoginError("");
- 
-   
-      await new Promise((r) => setTimeout(r, 600));
- 
-      if (email.toLowerCase() === "aluno@teste.com" && password === "123@senac") {
-        console.log("Login simulado com sucesso!");
-        // Quando quiser, pode redirecionar:
-        // router.replace("/(tabs)");
-      } else {
-        setLoginError("E-mail ou senha inválidos!");
-      }
-    } finally {
-      setLoading(false);
+    const router = useRouter();
+    //Infos de login pré-preenchidas (por enquanto!)
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("123@senac");
+    const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [loginError, setLoginError] = useState("");
+
+    //Verifica se email e senha estão preenchidos
+    const canSubmit = email.trim() !== "" && password.trim() !== "" && !loading;
+
+    const handleSignIn = async () => {
+        try {
+            setLoading(true);
+            setLoginError("");
+            //Simulação (sem back-end) só pra validar com os dados pré-preenchidos
+            /*Simula uma latência de rede (espera) de 600 milissegundos
+            new Promise((r) => setTimeout(r, 600)) cria uma promessa que resolve depois
+            de 600 ms; await pausa a função até passar esse tempo*/
+            await new Promise((r) => setTimeout(r, 600));
+            if (email.toLowerCase() === "aluno@teste.com" && password === "123@senac") {
+                Alert.alert("Login simulado com sucesso!");
+            }
+            else {
+                setLoginError("E-mail ou senha inválidos!");
+            }
+        }
+        finally {
+            setLoading(false);
+        }
     }
-  };
- 
-  return (
+
+   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -134,15 +134,9 @@ export function Login() {
             {/* Erro de login */}
             {!!loginError && <Text style={styles.loginError}>{loginError}</Text>}
  
-            {/* Divider */}
-            <View style={styles.dividerContainer}>
-              <View style={styles.dividerLine} />
-              <Text style={styles.dividerText}>ou</Text>
-              <View style={styles.dividerLine} />
-            </View>
- 
+             
             {/* Ações secundárias (opcional) */}
-            <TouchableOpacity onPress={() => router.push("/(auth)/register")}>
+            <TouchableOpacity onPress={() => router.push("./(auth)/register")}>
               <Text style={styles.signUpText}>
                 Não possui uma conta? <Text style={styles.signUpLink}>Cadastre-se</Text>
               </Text>
@@ -153,4 +147,3 @@ export function Login() {
     </SafeAreaView>
   );
 }
- 

@@ -1,3 +1,3 @@
-export default function TabLayout(){
-
+export default function TabLayout() {
+    
 }
