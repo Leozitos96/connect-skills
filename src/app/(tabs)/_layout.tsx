@@ -4,17 +4,23 @@ import React from 'react';
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tabs.Screen
+    <Tabs 
+      screenOptions={{ 
+        headerShown: false, 
+        tabBarActiveTintColor: "#111827", 
+        tabBarInactiveTintColor: "#9ca3af", 
+        tabBarStyle: { backgroundColor: "#ffffff", borderTopWidth: 0.5 }, 
+      }} 
+    > 
+      <Tabs.Screen 
+        name="index" 
+        options={{ 
+          tabBarIcon: ({ color, size }) => ( 
+            <Ionicons name="home-outline" color={color} size={size} /> 
+          ), 
+        }} 
+      /> 
+            <Tabs.Screen
         name="perfil"
         options={{
           title: 'Perfil',
@@ -23,6 +29,6 @@ export default function TabLayout() {
           ),
         }}
       />
-    </Tabs>
+    </Tabs> 
   );
 }
